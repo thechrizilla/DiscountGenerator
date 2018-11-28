@@ -16,9 +16,27 @@ public class DiscountGenerator {
 	public static void main(String[] args){
 		DiscountGenerator g = new DiscountGenerator();
 		
+		int n5 = 0;
+		int n10 = 0;
+		int n15 = 0;
+		int n20 = 0;
+		
 		for(int i = 0; i < 60; i++){
-			System.out.println(i + ": " + g.getDiscount());
+			int d = g.getDiscount();
+			System.out.println(i + ": " + d);
+			if(d == 5) n5++;
+			if(d == 10) n10++;
+			if(d == 15) n15++;
+			if(d == 20) n20++;
+			
+			if(d == -1) break;
 		}
+		
+		System.out.println("Number of $5 discounts: " + n5);
+		System.out.println("Number of $10 discounts: " + n10);
+		System.out.println("Number of $15 discounts: " + n15);
+		System.out.println("Number of $20 discounts: " + n20);
+
 	}
 
 	// Returns a valid discount
@@ -26,6 +44,7 @@ public class DiscountGenerator {
 		int discount = 0;
 
 		while(true){	// keep generating a discount until there is a discount that is available
+			if(num5 == 0 && num10 == 0 && num15 == 0 && num20 == 0) return -1;
 			discount = generateNum();
 			if(discount == 20 && num20 > 0) {
 				num20--;
